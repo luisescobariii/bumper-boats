@@ -41,27 +41,31 @@ class Boat {
         this.ripples.unshift();
       }
       this.hit = false;
-      for (const row of ocean.tiles) {
-        for (const tile of row) {
-          if (tile.isCollider && dist(this.pos.x, this.pos.y, tile.pos.x, tile.pos.y) < 50) {
-            this.hit = collidePolyPoly(this.poly, tile.poly);
-            if (this.hit) {
-              switch (tile.type) {
-                case 'land': this.die(); break;
-                case 'crate': tile.die(); this.bullets++; break;
-              }
+      for (const tile of colliders) {
+        const a = this.pos.x - tile.pos.x;
+        const b = this.pos.y - tile.pos.y;
+        if (a * a + b * b < 2500) {
+          tile.checking = true;
+          this.hit = collidePolyPoly(this.poly, tile.poly);
+          if (this.hit) {
+            switch (tile.type) {
+              case 'land': this.die(); break;
+              case 'crate': tile.die(); this.bullets++; break;
             }
           }
+        } else {
+          tile.checking = false;
         }
       }
     } 
     
     show() {
       for (const ripple of this.ripples) { ripple.show(); }
+      push();
       translate(this.pos);
       rotate(this.direction + HALF_PI);
       stroke(0);
-      strokeWeight(1);
+      strokeWeight(2);
       if (this.bullets > 0) {
         rectMode(CENTER);
         fill(0);
@@ -75,6 +79,7 @@ class Boat {
       vertex(-4, 10);
       bezierVertex(-6, -2,-6, -2, 0, -10);
       endShape(CLOSE);
+      pop();
     }
     
     control() {

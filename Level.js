@@ -9,11 +9,12 @@ class Level {
     }
     
     getRandom() {
-      const size = 20;
+      const sizeX = width / 20;
+      const sizeY = height / 20;
       const tiles = [];
-      for (let i = 0; i < size; i++) {
+      for (let i = 0; i < sizeY; i++) {
         const row = [];
-        for (let j = 0; j < size; j++) {
+        for (let j = 0; j < sizeX; j++) {
           const spawner = Math.random();
           switch(true) {
             case spawner < 0.05: row.push(2); break;

@@ -6,17 +6,19 @@ class Ocean {
       const r = 20;
       const a = PI / 3;
       let x;
-      let y = -r * tiles[0].length;
+      let y = 0;
       const rsina = r * sin(a);
       const cosa = cos(a);
       for (const row of tiles) {
-        x = -rsina * tiles.length;
+        x = 0;
         y += rsina * 2;
         const tileRow = [];
         for (let i = 0; i < row.length; i++) {
           x += r * (1 + cosa);
           y = i % 2 === 0 ? y + rsina : y - rsina;
-          tileRow.push(this.getTileOfType(row[i], x, y, r));
+          const tile = this.getTileOfType(row[i], x, y, r)
+          tileRow.push(tile);
+          if (tile.isCollider) { colliders.push(tile); }
         }
         this.tiles.push(tileRow);
       }

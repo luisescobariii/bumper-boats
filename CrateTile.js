@@ -27,6 +27,7 @@ class CrateTile extends OceanTile {
       if (!this.isAlive) { return; }
       stroke(51);
       fill(255, 186, 179);
+      if (this.checking) { fill('yellow') }
       beginShape();
       for (const {x, y} of this.poly) {
         vertex(x, y);

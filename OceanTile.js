@@ -21,13 +21,13 @@ class OceanTile extends Tile {
     }
     
     show() {
-      noStroke();
-      fill(255, this.opacity);
-      beginShape();
-      for (const {x, y} of this.poly) {
-        vertex(x, y);
-      }
-      endShape(CLOSE);
+    //   noStroke();
+    //   fill(255, this.opacity);
+    //   beginShape();
+    //   for (const {x, y} of this.poly) {
+    //     vertex(x, y);
+    //   }
+    //   endShape(CLOSE);
     }
     
   }

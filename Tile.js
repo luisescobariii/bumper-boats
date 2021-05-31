@@ -27,6 +27,7 @@ class Tile {
       if (!this.isAlive) { return; }
       stroke(0);
       noFill();
+      if (this.checking) { fill('yellow') }
       beginShape();
       for (const {x, y} of this.poly) {
         vertex(x, y);

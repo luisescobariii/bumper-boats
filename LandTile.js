@@ -11,6 +11,7 @@ class LandTile extends Tile {
       if (!this.isAlive) { return; }
       stroke(51);
       fill(145, 109, 63);
+      if (this.checking) { fill('yellow') }
       beginShape();
       for (const {x, y} of this.poly) {
         vertex(x, y);
