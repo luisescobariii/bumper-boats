@@ -1,14 +1,15 @@
 class Tile {
-  
+
     constructor(x, y, r) {
       this.type = 'generic';
       this.radius = r;
-      this.pos = createVector(x, y);    
+      this.pos = createVector(x, y);
       this.poly = this.getHexagonVerts(r);
       this.isCollider = false;
       this.isAlive = true;
+      this.visible = false;
     }
-    
+
     getHexagonVerts(r) {
       const a = PI / 3;
       const verts = [];
@@ -20,21 +21,13 @@ class Tile {
       }
       return verts;
     }
-    
-    update() {}
-    
-    show() {
-      if (!this.isAlive) { return; }
-      stroke(0);
-      noFill();
-      if (this.checking) { fill('yellow') }
-      beginShape();
-      for (const {x, y} of this.poly) {
-        vertex(x, y);
-      }
-      endShape(CLOSE);
+
+    update() {
+      this.visible = camera.contains(this.pos);
     }
-    
+
+    show() {}
+
     die() {
       this.isAlive = false;
       this.isCollider = false;

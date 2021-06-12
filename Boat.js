@@ -1,5 +1,5 @@
 class Boat {
-  
+
     constructor(x, y, color) {
       this.pos = createVector(x, y);
       this.heading = 0;
@@ -12,7 +12,7 @@ class Boat {
       this.ripples = [];
       this.isAlive = true;
     }
-    
+
     getPoly() {
       return [
         createVector(this.pos.x + 0, this.pos.y - 10),
@@ -22,15 +22,15 @@ class Boat {
         createVector(this.pos.x + - 6, this.pos.y - 2),
       ];
     }
-    
+
     update() {
       this.control();
-      
+
       this.direction += this.heading;
       this.pos.add(this.velocity);
       this.velocity.mult(0.99);
       this.heading *= 0.95;
-      
+
       this.poly = this.getPoly();
 
       if (frameCount % 6 === 0 && this.velocity.mag() > 0.25) {
@@ -42,6 +42,7 @@ class Boat {
       }
       this.hit = false;
       for (const tile of colliders) {
+        if (!tile.visible) { continue; }
         const a = this.pos.x - tile.pos.x;
         const b = this.pos.y - tile.pos.y;
         if (a * a + b * b < 2500) {
@@ -57,8 +58,8 @@ class Boat {
           tile.checking = false;
         }
       }
-    } 
-    
+    }
+
     show() {
       for (const ripple of this.ripples) { ripple.show(); }
       push();
@@ -81,7 +82,7 @@ class Boat {
       endShape(CLOSE);
       pop();
     }
-    
+
     control() {
       if (!this.isAlive) { return; }
       if (keyIsDown(UP_ARROW)) {
@@ -92,10 +93,10 @@ class Boat {
       if (keyIsDown(LEFT_ARROW)) { this.heading = -0.03; }
       else if (keyIsDown(RIGHT_ARROW)) { this.heading = 0.03; }
     }
-    
+
     die() {
       this.isAlive = false;
       this.velocity.mult(0);
     }
-    
+
   }

@@ -1,5 +1,5 @@
 class CrateTile extends OceanTile {
-  
+
     constructor(x, y, r) {
       super();
       this.type = 'crate';
@@ -14,16 +14,18 @@ class CrateTile extends OceanTile {
       this.backPoly = this.getHexagonVerts(r);
       this.isCollider = true;
     }
-    
+
     show() {
-      noStroke();
-      fill(255, this.opacity);
-      beginShape();
-      for (const {x, y} of this.backPoly) {
-        vertex(x, y);
+      if (!this.visible) { return; }
+
+      if (config.displayOceanTiles) {
+        noStroke();
+        fill(255, this.opacity);
+        beginShape();
+        for (const {x, y} of this.backPoly) { vertex(x, y); }
+        endShape(CLOSE);
       }
-      endShape(CLOSE);
-      
+
       if (!this.isAlive) { return; }
       stroke(51);
       fill(255, 186, 179);
@@ -34,5 +36,4 @@ class CrateTile extends OceanTile {
       }
       endShape(CLOSE);
     }
-      
   }

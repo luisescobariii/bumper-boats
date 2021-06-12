@@ -1,8 +1,8 @@
 class Ocean {
-  
+
     constructor(tiles) {
       this.tiles = [];
-      
+
       const r = 20;
       const a = PI / 3;
       let x;
@@ -23,7 +23,7 @@ class Ocean {
         this.tiles.push(tileRow);
       }
     }
-    
+
     getTileOfType(type, x, y, r) {
       switch(type) {
         case 1: return new LandTile(x, y, r);
@@ -31,7 +31,7 @@ class Ocean {
         default: return  new OceanTile(x, y, r);
       }
     }
-    
+
     update() {
       for (const row of this.tiles) {
         for (const tile of row) {
@@ -39,7 +39,7 @@ class Ocean {
         }
       }
     }
-    
+
     show() {
       for (const row of this.tiles) {
         for (const tile of row) {
@@ -47,5 +47,5 @@ class Ocean {
         }
       }
     }
-    
+
   }
