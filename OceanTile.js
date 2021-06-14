@@ -1,24 +1,20 @@
 class OceanTile extends Tile {
 
-    constructor(x, y, r) {
-      super(x, y, r);
+    constructor(x, y, r, i, j) {
+      super(x, y, r, i, j);
       this.type = 'ocean';
       this.maxOpacity = 32;
       this.opacity = Math.random() * this.maxOpacity;
+      this.fadeMult = Math.random() * 0.3;
     }
 
     update() {
       super.update();
-      /*
-      if (frameCount % 4 === 0) {
-        const inc = Math.random() < 0.5 ? -1 : 1;
-        this.opacity += inc;
-        if (this.opacity < 0) {
-          this.opacity = 0;
-        } else if (this.opacity > this.maxOpacity) {
-          this.opactiy = this.maxOpacity;
-        }
-      }*/
+
+      this.opacity += this.fadeMult;
+      if (this.opacity <= 0 || this.opacity >= this.maxOpacity) {
+        this.fadeMult *= -1;
+      }
     }
 
     show() {

@@ -1,8 +1,8 @@
 class Config {
 
     constructor() {
-        this.displayOceanTiles = false;
-        this.applyCameraTransform = true;
+        this.displayOceanTiles = true;
+        this.showOceanBorder = true;
     }
 
 }

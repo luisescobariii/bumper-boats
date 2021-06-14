@@ -1,7 +1,7 @@
 class LandTile extends Tile {
 
-    constructor(x, y, r) {
-      super(x, y, r);
+    constructor(x, y, r, i, j) {
+      super(x, y, r, i, j);
       this.type = 'land';
       this.isCollider = true;
       this.grassPoly = this.getHexagonVerts(r * 0.75);
@@ -13,7 +13,6 @@ class LandTile extends Tile {
       stroke(51);
       strokeWeight(2);
       fill(145, 109, 63);
-      if (this.checking) { fill('yellow') }
       beginShape();
       for (const {x, y} of this.poly) {
         vertex(x, y);
@@ -26,6 +25,15 @@ class LandTile extends Tile {
         vertex(x, y);
       }
       endShape(CLOSE);
+    }
+
+    die() {
+      ocean.tiles[this.rowIndex].splice(
+        this.columnIndex,
+        1,
+        new OceanTile(this.x, this.y, this.r, this.rowIndex, this.columnIndex)
+      );
+      colliders.splice(colliders.indexOf(this), 1);
     }
 
   }

@@ -4,7 +4,6 @@ class Camera {
     this.target = target;
     this.smallestSide = width > height ? height + 0 : width + 0;
     this.zoom = this.smallestSide / 400;
-    // this.zoom = 1;
   }
 
   update() {
@@ -14,16 +13,16 @@ class Camera {
     this.halfH = this.h / 2;
     this.x = this.target.pos.x - this.halfW;
     this.y = this.target.pos.y - this.halfH;
-    if (this.x < 0) { this.x = 0; }
-    else if (this.x > width - this.w) { this.x = width - this.w}
-    if (this.y < 0) { this.y = 0; }
-    else if (this.y > height - this.h) { this.y = height - this.h}
+    if (this.x < ocean.pos.x) { this.x = ocean.pos.x; }
+    else if (this.x + this.w > ocean.pos.x + ocean.w) { this.x = ocean.pos.x + ocean.w - this.w; }
+    if (this.y < ocean.pos.y) { this.y = ocean.pos.y; }
+    else if (this.y + this.h > ocean.pos.y + ocean.h) { this.y = ocean.pos.y + ocean.h - this.h; }
   }
 
   show() {
+    scale(this.zoom);
+    translate(-this.x, -this.y);
     if (config.applyCameraTransform) {
-      scale(this.zoom);
-      translate(-this.x, -this.y);
     } else {
       noFill();
       stroke(0);

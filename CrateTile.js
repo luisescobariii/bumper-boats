@@ -1,7 +1,7 @@
 class CrateTile extends OceanTile {
 
-    constructor(x, y, r) {
-      super();
+    constructor(x, y, r, i, j) {
+      super(x, y, r, i, j);
       this.type = 'crate';
       this.pos = createVector(x, y);
       const boxR = r / 4;
@@ -28,12 +28,18 @@ class CrateTile extends OceanTile {
 
       if (!this.isAlive) { return; }
       stroke(51);
+      strokeWeight(2);
       fill(255, 186, 179);
-      if (this.checking) { fill('yellow') }
       beginShape();
       for (const {x, y} of this.poly) {
         vertex(x, y);
       }
       endShape(CLOSE);
     }
+
+    die() {
+      super.die();
+      colliders.splice(colliders.indexOf(this), 1);
+    }
+
   }

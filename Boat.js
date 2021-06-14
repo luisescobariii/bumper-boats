@@ -40,15 +40,14 @@ class Boat {
       if (this.ripples.length > 0 && this.ripples[0].opacity < 0) {
         this.ripples.unshift();
       }
-      this.hit = false;
+      if (!this.isAlive) { return; }
       for (const tile of colliders) {
-        if (!tile.visible) { continue; }
+        if (!tile.visible || !tile.isAlive) { continue; }
         const a = this.pos.x - tile.pos.x;
         const b = this.pos.y - tile.pos.y;
         if (a * a + b * b < 2500) {
           tile.checking = true;
-          this.hit = collidePolyPoly(this.poly, tile.poly);
-          if (this.hit) {
+          if (collidePolyPoly(this.poly, tile.poly)) {
             switch (tile.type) {
               case 'land': this.die(); break;
               case 'crate': tile.die(); this.bullets++; break;
@@ -94,9 +93,20 @@ class Boat {
       else if (keyIsDown(RIGHT_ARROW)) { this.heading = 0.03; }
     }
 
+    fire() {
+      if (!this.isAlive) { return; }
+      if (this.bullets === 0) { return; }
+      worldBullets.push(
+        new Bullet(this.pos, this.direction + HALF_PI),
+        new Bullet(this.pos, this.direction + PI + HALF_PI)
+      );
+      this.bullets--;
+    }
+
     die() {
       this.isAlive = false;
       this.velocity.mult(0);
+      worldExplosions.push(new Explosion(this.pos));
     }
 
   }

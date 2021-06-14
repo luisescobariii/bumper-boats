@@ -1,6 +1,8 @@
 class Tile {
 
-    constructor(x, y, r) {
+    constructor(x, y, r, i, j) {
+      this.rowIndex = i;
+      this.columnIndex = j;
       this.type = 'generic';
       this.radius = r;
       this.pos = createVector(x, y);

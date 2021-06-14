@@ -1,5 +1,5 @@
 class Level {
-  
+
     constructor(type) {
       this.types = [0, 1, 2];
       switch(type) {
@@ -7,10 +7,10 @@ class Level {
         default:  this.tiles = this.getRandom();
       }
     }
-    
+
     getRandom() {
-      const sizeX = width / 20;
-      const sizeY = height / 20;
+      const sizeX = 30 * 1.17;
+      const sizeY = 30;
       const tiles = [];
       for (let i = 0; i < sizeY; i++) {
         const row = [];
@@ -26,5 +26,5 @@ class Level {
       }
       return tiles;
     }
-  
+
   }
