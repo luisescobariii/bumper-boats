@@ -1,6 +1,8 @@
 # bumper-boats
 Multiplayer naval battle game, based on the game "Shipped" by Majorariatto
 
+Play online at: https://luisescobariii.github.io/bumper-boats/
+
 Controls:
 - Steer: LEFT and RRIGHT arrow keys
 - Accelerate: UP arrow key
